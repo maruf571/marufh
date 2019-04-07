@@ -4,13 +4,14 @@ pipeline {
     environment {
      shortCommit = sh(returnStdout: true, script: "git log -n 1 --pretty=format:'%h'").trim()   
      // version = readMavenPom().getVersion()
-     image = "eu.gcr.io/concise-emitter-235116/marufh:${shortCommit}"
+     image = "eu.gcr.io/concise-emitter-235116/marufh:1.0.0"
     }
 
     stages {
         stage('Build') {
             steps {
-                print "${image}"
+                sh 'docker build . -t ${image}'
+                sh 'docker push ${image}'
             }
         }
     }
