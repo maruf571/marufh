@@ -4,7 +4,7 @@ pipeline {
     environment {
      shortCommit = sh(returnStdout: true, script: "git log -n 1 --pretty=format:'%h'").trim()   
      // version = readMavenPom().getVersion()
-     image = "eu.gcr.io/concise-emitter-235116/marufh:1.0.0"
+     image = "eu.gcr.io/marufh/marufh:1.0.0"
     }
 
     stages {
