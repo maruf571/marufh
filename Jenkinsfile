@@ -10,7 +10,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'gcloud --version'
+                sh 'echo $PATH'
                 withEnv(['GCLOUD_PATH=/var/lib/jenkins/google-cloud-sdk/bin']) {
                       sh 'gcloud --version'
                       sh 'docker build . -t ${image}'
