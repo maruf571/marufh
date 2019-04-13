@@ -2,10 +2,10 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: marufh
-  namespace: default
   labels:
     app: marufh
+  name: marufh
+  namespace: default
 spec:
   replicas: 1
   revisionHistoryLimit: 2
@@ -32,3 +32,22 @@ spec:
       schedulerName: default-scheduler
       securityContext: {}
       terminationGracePeriodSeconds: 30
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: marufh
+  name: marufh-service
+  namespace: default
+spec:
+  externalTrafficPolicy: Cluster
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: marufh
+  sessionAffinity: None
+  type: LoadBalancer
