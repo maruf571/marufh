@@ -14,7 +14,17 @@ pipeline {
                 sh 'docker push ${image}'
             }
         }
+
+        stage('Deploy Image to GKC') {
+            when { branch 'master' }
+            steps {
+                sh 'kubectl apply -f deployment/deployment.yml'
+            }
+        }
+
+
     }
+
 
 /*
     stages {
