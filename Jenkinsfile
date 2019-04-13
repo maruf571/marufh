@@ -13,9 +13,9 @@ pipeline {
                 withEnv(['GCLOUD_PATH=/var/lib/jenkins/google-cloud-sdk/bin']) {
                       sh '$GCLOUD_PATH/gcloud --version'
                       sh 'docker build . -t ${image}'
-                      sh 'gcloud auth configure-docker'
+                      sh '$GCLOUD_PATH/gcloud auth configure-docker'
                       sh 'docker push ${image}'
-                      sh 'kubectl apply -f deployment/deployment.yml'
+                      sh '$GCLOUD_PATH/kubectl apply -f deployment/deployment.yml'
                 }
             }
         }
