@@ -4,21 +4,17 @@ pipeline {
     environment {
      shortCommit = sh(returnStdout: true, script: "git log -n 1 --pretty=format:'%h'").trim()   
      // version = readMavenPom().getVersion()
-     image = "eu.gcr.io/marufh/marufh:1.0.2"
+     image = "eu.gcr.io/marufh/marufh:1.0.3"
      PATH="/var/lib/jenkins/google-cloud-sdk/bin:$PATH"
     }
 
     stages {
         stage('Build') {
             steps {
-                sh 'echo $PATH'
-                withEnv(['GCLOUD_PATH=/var/lib/jenkins/google-cloud-sdk/bin']) {
-                      sh 'gcloud --version'
-                      sh 'docker build . -t ${image}'
-                      sh '$GCLOUD_PATH/gcloud auth configure-docker'
-                      sh 'docker push ${image}'
-                      sh '$GCLOUD_PATH/kubectl apply -f deployment/deployment.yml'
-                }
+                sh 'docker build . -t ${image}'
+                sh 'gcloud auth configure-docker'
+                sh 'docker push ${image}'
+                sh 'kubectl apply -f deployment/deployment.yml'
             }
         }
 
