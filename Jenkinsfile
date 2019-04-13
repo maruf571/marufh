@@ -10,6 +10,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
+                sh 'whoami'
                 sh 'docker build . -t ${image}'
                 sh 'docker push ${image}'
             }
