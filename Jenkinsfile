@@ -10,8 +10,8 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'whoami'
                 sh 'docker build . -t ${image}'
+                sh 'gcloud auth configure-docker'
                 sh 'docker push ${image}'
             }
         }
