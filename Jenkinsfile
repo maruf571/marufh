@@ -4,7 +4,7 @@ pipeline {
     environment {
      // shortCommit = sh(returnStdout: true, script: "git log -n 1 --pretty=format:'%h'").trim()
      // version = readMavenPom().getVersion()
-     image = "eu.gcr.io/marufh/marufh:1.0.7"
+     image = "eu.gcr.io/marufh/marufh:1.0.8"
      PATH="/var/lib/jenkins/google-cloud-sdk/bin:$PATH"
     }
 
