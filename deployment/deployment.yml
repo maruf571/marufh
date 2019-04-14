@@ -24,7 +24,7 @@ spec:
         app: marufh
     spec:
       containers:
-      - image: eu.gcr.io/marufh/marufh:1.0.4
+      - image: eu.gcr.io/marufh/marufh:1.0.5
         imagePullPolicy: Always
         name: marufh
       dnsPolicy: ClusterFirst
